@@ -36,13 +36,7 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
 
     @Override
     public void show() {
-
-        if (!mSkeletonAdapter.hasObservers()){
-            mRecyclerView.setAdapter(mSkeletonAdapter);
-        }else {
-            mSkeletonAdapter.notifyDataSetChanged();
-        }
-
+        mRecyclerView.setAdapter(mSkeletonAdapter);
         if (!mRecyclerView.isComputingLayout() && mRecyclerViewFrozen) {
             mRecyclerView.setLayoutFrozen(true);
         }
@@ -50,12 +44,7 @@ public class RecyclerViewSkeletonScreen implements SkeletonScreen {
 
     @Override
     public void hide() {
-
-        if (!mActualAdapter.hasObservers()){
-            mRecyclerView.setAdapter(mActualAdapter);
-        }else {
-            mActualAdapter.notifyDataSetChanged();
-        }
+        mRecyclerView.setAdapter(mActualAdapter);
     }
 
     public static class Builder {

@@ -16,6 +16,7 @@ import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.SkeletonScreen;
 import com.ethanhua.skeleton.sample.adapter.NewsAdapter;
 import com.ethanhua.skeleton.sample.adapter.PersonAdapter;
+import com.fnconn.code.XRecyclerView;
 
 /**
  * Created by ethanhua on 2017/7/27.
@@ -29,6 +30,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public static final String TYPE_GRID = "type_grid";
     private String mType;
     private RecyclerView recyclerView;
+
+    private XRecyclerView xRecyclerView;
     private Button mButton;
     private RecyclerViewSkeletonScreen skeletonScreen;
     private NewsAdapter adapter;
@@ -57,6 +60,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        xRecyclerView = findViewById(R.id.xrecyclerView);
+
+        xRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +81,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         if (skeletonScreen == null){
 
-            skeletonScreen = Skeleton.bind(recyclerView)
+            skeletonScreen = Skeleton.bind(xRecyclerView)
                     .adapter(adapter)
                     .shimmer(true)
                     .angle(20)
@@ -92,7 +98,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
    private void hideSkeleton(){
 
-       recyclerView.postDelayed(new Runnable() {
+       xRecyclerView.postDelayed(new Runnable() {
            @Override
            public void run() {
                skeletonScreen.hide();
