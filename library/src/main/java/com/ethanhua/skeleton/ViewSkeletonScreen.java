@@ -25,6 +25,7 @@ public class ViewSkeletonScreen implements SkeletonScreen {
     private final boolean mShimmer;
     private final int mShimmerDuration;
     private final int mShimmerAngle;
+    private final ViewSkeletonScreen viewSkeletonScreen;
 
     private ViewSkeletonScreen(Builder builder) {
         mActualView = builder.mView;
@@ -34,6 +35,7 @@ public class ViewSkeletonScreen implements SkeletonScreen {
         mShimmerAngle = builder.mShimmerAngle;
         mShimmerColor = builder.mShimmerColor;
         mViewReplacer = new ViewReplacer(builder.mView);
+        viewSkeletonScreen = builder.viewSkeletonScreen;
     }
 
     private ShimmerLayout generateShimmerContainerLayout(ViewGroup parentView) {
@@ -98,6 +100,7 @@ public class ViewSkeletonScreen implements SkeletonScreen {
         private int mShimmerColor;
         private int mShimmerDuration = 1000;
         private int mShimmerAngle = 20;
+        private ViewSkeletonScreen viewSkeletonScreen;
 
         public Builder(View view) {
             this.mView = view;
@@ -147,10 +150,11 @@ public class ViewSkeletonScreen implements SkeletonScreen {
             return this;
         }
 
-        public ViewSkeletonScreen show() {
-            ViewSkeletonScreen skeletonScreen = new ViewSkeletonScreen(this);
-            skeletonScreen.show();
-            return skeletonScreen;
+        public ViewSkeletonScreen build() {
+            if (viewSkeletonScreen == null){
+                viewSkeletonScreen = new ViewSkeletonScreen(this);
+            }
+            return viewSkeletonScreen;
         }
 
     }
